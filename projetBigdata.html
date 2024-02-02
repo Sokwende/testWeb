@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real estate valuation</title>
+	<link rel="stylesheet" href="styleProjet.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+	<div class="champ1">
+		<div class="entete">
+			<div align="center" style="font-weight: bold; font-size: 2em">Real estate valuation</div>
+			<div align="center">Evaluation du prix d'une maison</div>
+		</div>
+		
+		<div class="corps">
+			<input placeholder="Date de la transaction" id="Date"></input>
+			<input placeholder="Age de la maison" id="age"></input>
+			<input id="distance" placeholder="distance de la plus proche route goudronnée"></input>
+			<input placeholder="Nombre de boutiques aux alentours" id="nbreBoutique"></input>
+			<button id="predire" onclick="predire()">Prédire</button>
+			
+			<div align="center" id="resultat">Cette maison est evaluée à <div id="result"></div></div>
+		</div>
+	</div>
+	<script>
+		function predire() {
+			// Récupérer les valeurs des champs
+			var date = document.getElementById("Date").value;
+			var age = document.getElementById("age").value;
+			var distance = document.getElementById("distance").value;
+			var nbreBoutique = document.getElementById("nbreBoutique").value;
+			
+			var alpha = 2.86314226;
+			var beta  = -0.23058598;
+			var eps   = -0.00561566;
+			var gamma = 1.18682057;
+			var constante = -5719.197987431622;
+
+			 
+			var reponseUSD = alpha*date+beta*age+eps*distance+gamma*nbreBoutique+constante;
+			
+			reponseUSD = reponseUSD.toFixed(2);
+			
+			var reponseCFA = reponseUSD*604;
+			
+			var result = document.getElementById("result");
+			
+			resultat.style.display = 'block';
+			result.textContent = reponseUSD+' USD '+' soit '+reponseCFA+' CFA';
+		};
+
+</script>
+	
+	
+</body>
+</html>
